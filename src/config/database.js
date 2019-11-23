@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 mongoose.connect(process.env.DATABASE, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
 mongoose.Promise = global.Promise;
-mongoose.connection.on("error", error => {
+mongoose.connection.on('error', error => {
   console.log(error);
 });
 
