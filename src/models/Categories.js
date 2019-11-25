@@ -17,7 +17,7 @@ const CategoriesSchema = new Schema(
 );
 
 CategoriesSchema.virtual('thumbnail_url').get(function() {
-  return `http://localhost:3003/files/${this.thumbnail}`;
+  return `http://localhost:3003/images/${this.thumbnail}`;
 });
 
 module.exports = model('Categories', CategoriesSchema);

@@ -6,9 +6,11 @@ const uploadConfig = require('./middlewares/UploadMiddleware');
 
 const InfoApi = require('./controllers/InfoController');
 const UserController = require('./controllers/UserController');
+const AdController = require('./controllers/AdController');
 
 const router = express.Router();
-const upload = multer(uploadConfig);
+const uploadCatItem = multer(uploadConfig.uploadCatItem);
+const uploadAdImgs = multer(uploadConfig.uploadAdImgs);
 
 // public routes
 router.get('/states', InfoApi.state);
@@ -22,11 +24,19 @@ router.get('/user/me', AuthMiddleware.validateToken, UserController.show);
 router.put('/user/me', AuthMiddleware.validateToken, UserController.update);
 router.get('/logout', AuthMiddleware.validateToken, UserController.logout);
 
+// ads routes
+router.post(
+  '/ad/add',
+  uploadAdImgs.array('img', 10),
+  AuthMiddleware.validateToken,
+  AdController.store
+);
+
 // admin routes
 router.post(
   '/categories',
+  uploadCatItem.single('thumbnail'),
   AuthMiddleware.validateToken,
-  upload.single('thumbnail'),
   InfoApi.categoriesPost
 );
 
