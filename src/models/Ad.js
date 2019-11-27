@@ -14,6 +14,7 @@ const AdSchema = new Schema(
     price: Number,
     priceNeg: Boolean,
     description: String,
+    state: String,
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',

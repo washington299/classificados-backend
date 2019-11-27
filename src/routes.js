@@ -16,6 +16,7 @@ const uploadAdImgs = multer(uploadConfig.uploadAdImgs);
 router.get('/states', InfoApi.state);
 router.get('/categories', InfoApi.categoriesGet);
 router.get('/ad/list', AdController.index);
+router.get('/ad/item', AdController.show);
 router.get('/islogged', AuthMiddleware.isLogged);
 
 // users routes
