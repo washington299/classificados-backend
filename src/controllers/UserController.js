@@ -5,15 +5,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('../middlewares/AuthMiddleware');
 
 const register = async (req, res) => {
-  const { name, state, email, password, confirmedPassword } = req.body;
+  const { name, state, email, password } = req.body;
 
-  if (!name || !state || !email || !password || !confirmedPassword) {
+  if (!name || !state || !email || !password) {
     res.json({ error: 'Preencha todos os campos!!!' });
-    return;
-  }
-
-  if (password !== confirmedPassword) {
-    res.json({ error: 'Suas senhas não estão iguais!!!' });
     return;
   }
 
