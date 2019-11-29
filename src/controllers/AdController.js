@@ -50,9 +50,9 @@ const show = async (req, res) => {
     return;
   }
 
-  const { views, user } = ad;
+  const { views, userInfo } = ad;
   await Ad.findOneAndUpdate({ _id: ad._id }, { views: views + 1 });
-  const others = await Ad.find({ user }, null, {
+  const others = await Ad.find({ userInfo }, null, {
     sort: { createdAt: -1 },
   });
 
@@ -60,8 +60,8 @@ const show = async (req, res) => {
 };
 
 const store = async (req, res) => {
-  const { title, price, priceneg, desc, token } = req.body;
-  let { cat } = req.body;
+  const { title, priceneg, desc, token } = req.body;
+  let { cat, price } = req.body;
   const filename = req.files.map(name => name.filename);
 
   if (!token) {
@@ -80,6 +80,14 @@ const store = async (req, res) => {
     .replace('ç', 'c')
     .replace('&', 'e');
 
+  // formating the price, it´s coming as string and i changed to float.
+  if (!price) {
+    price = null;
+  } else {
+    price = price.replace(/[^\d]+/g, '');
+    price = parseFloat(price);
+  }
+
   const info = jwt.decodeToken(token);
   const user = await User.findOne({ _id: info.id }).select('-password');
 
@@ -87,7 +95,7 @@ const store = async (req, res) => {
     photos: filename,
     title,
     price,
-    priceNeg: priceneg ? true : false,
+    priceNeg: priceneg,
     description: desc,
     category: cat,
     state: user.state,
