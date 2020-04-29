@@ -5,11 +5,16 @@
 Essa é uma API Restful do sistema de classificados que é um mercado digital estilo OLX,
 você pode ver o link para o front-end [aqui](https://github.com/washington299/classificados-frontend).
 
-## Tecnologias
+## Bibliotecas
 
-Para essa Api performatica e rápida eu utilizei o [NodeJs](https://nodejs.org/en/) no back-end
-e o banco de dados [MongoDb](https://www.mongodb.com/) com a biblioteca [Mongoose](https://mongoosejs.com/) para armazenamento das informações, e para melhorar a qualidade do código utilizei a ferramenta
-[Eslint](https://eslint.org/) com o estilo de código do [AirBnb](https://github.com/airbnb/javascript).
+- bcrypt
+- cors
+- dotenv
+- express
+- jsonwebtoken
+- mongoose
+- multer
+- uuid
 
 ## contribuições
 
